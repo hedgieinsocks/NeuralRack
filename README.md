@@ -7,7 +7,7 @@
 
 NeuralRack is a Neural Model and Impulse Response File loader for Linux/Windows.
 
-It supports [*.nam files](https://www.tone3000.com/search?tags=103) and, or 
+It supports A1/A2 [*.nam files](https://www.tone3000.com/search?tags=103) and, or 
 [*.json or .aidax files](https://www.tone3000.com/search?tags=23562) by using the 
 [NeuralAudio](https://github.com/mikeoliphant/NeuralAudio) engine.
 
