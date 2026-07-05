@@ -32,6 +32,7 @@ namespace neuralrack {
 
 class NeuralModelLoader  {
 private:
+    NeuralAudio::NeuralModelLoader  neuralLoader;
     NeuralAudio::NeuralModel*       model;
     StreamingResampler              toModel;
     StreamingResampler              toStream;
