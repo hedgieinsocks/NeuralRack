@@ -15,6 +15,7 @@ namespace neuralrack {
 NeuralModelLoader::NeuralModelLoader(std::condition_variable *Sync)
     : model(nullptr), SyncWait(Sync) {
     neuralLoader.SetDefaultMaxAudioBufferSize(4096);
+    maxBufferSize = 4096;
     loudness = 0.0;
     nGain = 1.0;
     needResample = 0;
@@ -36,6 +37,7 @@ void NeuralModelLoader::clearState() {
 void NeuralModelLoader::setMaxBufferSize(int maxSize) {
     neuralLoader.SetDefaultMaxAudioBufferSize(maxSize);
     if (model) model->SetMaxAudioBufferSize(maxSize);
+    maxBufferSize = maxSize;
 }
 
 void NeuralModelLoader::init(unsigned int sample_rate) {
@@ -88,7 +90,10 @@ int NeuralModelLoader::getPhaseOffset() {
         }
 
         model->Prewarm();
-        model->Process(buffer, outbuffer, size);
+        for (int32_t processed = 0; processed < size; processed += maxBufferSize) {
+            int32_t chunk = std::min(maxBufferSize, size - processed);
+            model->Process(buffer + processed, outbuffer + processed, chunk);
+        }
         model->Prewarm();
 
         for (int delay = 0; delay < maxDelay; ++delay) {

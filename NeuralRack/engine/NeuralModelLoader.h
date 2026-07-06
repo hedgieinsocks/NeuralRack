@@ -11,6 +11,7 @@
 #define MINGW_STDTHREAD_REDUNDANCY_WARNING
 #endif
 
+#include <algorithm>
 #include <atomic>
 #include <cstdint>
 #include <unistd.h>
@@ -44,6 +45,7 @@ private:
     int                             fSampleRate;
     int                             modelSampleRate;
     int                             needResample;
+    int                             maxBufferSize;
 
     float                           loudness;
     float                           ramp;
