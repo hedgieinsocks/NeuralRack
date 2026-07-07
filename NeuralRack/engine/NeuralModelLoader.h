@@ -11,6 +11,7 @@
 #define MINGW_STDTHREAD_REDUNDANCY_WARNING
 #endif
 
+#include <algorithm>
 #include <atomic>
 #include <cstdint>
 #include <unistd.h>
@@ -32,6 +33,7 @@ namespace neuralrack {
 
 class NeuralModelLoader  {
 private:
+    NeuralAudio::NeuralModelLoader  neuralLoader;
     NeuralAudio::NeuralModel*       model;
     StreamingResampler              toModel;
     StreamingResampler              toStream;
@@ -43,6 +45,7 @@ private:
     int                             fSampleRate;
     int                             modelSampleRate;
     int                             needResample;
+    int                             maxBufferSize;
 
     float                           loudness;
     float                           ramp;
