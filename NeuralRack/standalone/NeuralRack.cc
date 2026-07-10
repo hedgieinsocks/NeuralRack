@@ -737,6 +737,9 @@ private:
                 key.clear();
                 value.clear();
             }
+        if (remove) {
+            writePreset(&outfile, currentPreset);
+        }
         infile.close();
         outfile.close();
         std::remove(presetFile.c_str());
